@@ -1,0 +1,18 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Jun 16 23:31:02 2018
+
+@author: LU
+"""
+
+import tensorflow as tf
+b = tf.constant(2)
+c = tf.constant(9)
+config = tf.ConfigProto(log_device_placement=False, allow_soft_placement=True)
+# 打印分配日志 ， 允许tensorflow自动分配设备
+config.gpu_options.allow_growth = True# 按需分配
+with tf.Session(config = config) as sess:
+    with tf.device('/gpu:1'):
+        print(sess.run(b+c))
+        print(sess.run(c**(c+b**c)))
+        
